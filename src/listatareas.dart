@@ -14,7 +14,7 @@ class _ListaTareasState extends State<ListaTareas> {
       appBar: AppBar(
         title: Text('Lista de tareas'),
       ),
-      backgroundColor: Colors.grey[200], // Cambio de color de fondo de la página
+      backgroundColor: Colors.grey[200], 
       body: ListView.builder(
         itemCount: _tareasTerminadas.length,
         itemBuilder: (context, index) {

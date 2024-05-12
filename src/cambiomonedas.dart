@@ -40,19 +40,51 @@ class _CambioMonedasState extends State<CambioMonedas> {
                   child: Text(value),
                 );
               }).toList(),
+              style: TextStyle(fontSize: 20, color: Colors.black),
+              icon: Icon(Icons.arrow_drop_down, size: 30, color: Colors.black),
+              elevation: 2,
+              isExpanded: true,
+              underline: Container(
+                height: 2,
+                color: Colors.black,
+              ),
             ),
             SizedBox(height: 20),
             TextField(
               keyboardType: TextInputType.number,
+              style: TextStyle(fontSize: 20),
               decoration: InputDecoration(
                 labelText: 'Cantidad a cambiar',
-                border: OutlineInputBorder(),
+                labelStyle: TextStyle(fontSize: 18),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
               onChanged: (value) {
                 setState(() {
                   cantidad = double.tryParse(value) ?? 0;
                 });
               },
+            ),
+            SizedBox(height: 20),
+            Container(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  'Calcular',
+                  style: TextStyle(fontSize: 20),
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(15)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 20),
             Text(
