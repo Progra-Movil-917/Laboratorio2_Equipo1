@@ -14,7 +14,7 @@ class _ListaTareasState extends State<ListaTareas> {
       appBar: AppBar(
         title: Text('Lista de tareas'),
       ),
-      backgroundColor: Colors.grey[200], 
+      backgroundColor: Colors.grey[200],
       body: ListView.builder(
         itemCount: _tareasTerminadas.length,
         itemBuilder: (context, index) {

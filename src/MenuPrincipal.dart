@@ -4,19 +4,16 @@ import 'cambiomonedas.dart';
 import 'listatareas.dart';
 import 'podcast.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MenuP1 extends StatelessWidget {
+  const MenuP1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App de Ceutec',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 0, 0)),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 0, 0)),
         useMaterial3: true,
       ),
       home: const MyHomePage(),
@@ -32,14 +29,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Widget _currentPage = Placeholder(); // Página actualmente mostrada
-
-  @override
-  void initState() {
-    super.initState();
-    // La página inicial es Noticias
-    _currentPage = Noticias();
-  }
+  int _selectedIndex = 0; // Índice del elemento seleccionado en el Drawer
+  List<Widget> _pages = [
+    Noticias(),
+    CambioMonedas(),
+    ListaTareas(),
+    Podcast(),
+  ]; // Lista de páginas correspondientes a cada elemento del Drawer
 
   @override
   Widget build(BuildContext context) {
@@ -55,58 +51,73 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
               ),
-              child: Text(
-                'Menu principal',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 25,
+              child: Container(
+                alignment: Alignment.center,
+                child: const Text(
+                  'Menu principal',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 25,
+                  ),
                 ),
               ),
             ),
             ListTile(
-              leading: Icon(Icons.article),
-              title: Text('Noticias'),
               onTap: () {
                 setState(() {
-                  _currentPage = Noticias();
+                  _selectedIndex = 0;
                 });
                 Navigator.pop(context);
               },
+              tileColor:
+                  _selectedIndex == 0 ? Colors.grey.withOpacity(0.5) : null,
+              selectedTileColor: Colors.grey.withOpacity(0.5),
+              leading: const Icon(Icons.article),
+              title: const Text('Noticias'),
             ),
             ListTile(
-              leading: Icon(Icons.attach_money),
-              title: Text('El cambio de monedas'),
               onTap: () {
                 setState(() {
-                  _currentPage = CambioMonedas();
+                  _selectedIndex = 1;
                 });
                 Navigator.pop(context);
               },
+              tileColor:
+                  _selectedIndex == 1 ? Colors.grey.withOpacity(0.5) : null,
+              selectedTileColor: Colors.grey.withOpacity(0.5),
+              leading: const Icon(Icons.attach_money),
+              title: const Text('El cambio de monedas'),
             ),
             ListTile(
-              leading: Icon(Icons.assignment),
-              title: Text('Lista de tareas'),
               onTap: () {
                 setState(() {
-                  _currentPage = ListaTareas();
+                  _selectedIndex = 2;
                 });
                 Navigator.pop(context);
               },
+              tileColor:
+                  _selectedIndex == 2 ? Colors.grey.withOpacity(0.5) : null,
+              selectedTileColor: Colors.grey.withOpacity(0.5),
+              leading: const Icon(Icons.assignment),
+              title: const Text('Lista de tareas'),
             ),
             ListTile(
-              leading: Icon(Icons.audiotrack),
-              title: Text('Podcast'),
               onTap: () {
                 setState(() {
-                  _currentPage = Podcast();
+                  _selectedIndex = 3;
                 });
                 Navigator.pop(context);
               },
+              tileColor:
+                  _selectedIndex == 3 ? Colors.grey.withOpacity(0.5) : null,
+              selectedTileColor: Colors.grey.withOpacity(0.5),
+              leading: const Icon(Icons.audiotrack),
+              title: const Text('Podcast'),
             ),
           ],
         ),
       ),
-      body: _currentPage, // Mostrar la página actual
+      body: _pages[_selectedIndex],
     );
   }
 }
